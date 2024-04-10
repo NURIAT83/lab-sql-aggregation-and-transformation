@@ -1,0 +1,18 @@
+USE Sakila;
+SELECT MAX(length) AS max_duration FROM film;
+SELECT MIN(length) AS min_duration FROM film;
+SELECT FLOOR(AVG((length)/60)) AS AVG_duration FROM film;
+SELECT AVG(length) FROM film;
+SELECT CONCAT (AVG(length) DIV 60,'h ', ROUND(AVG(length) % 60),'m') AS avg_duration FROM film;
+SELECT datediff(MAX(rental_date), MIN(rental_date)) AS days_of_operation FROM rental;
+SELECT MONTHNAME(rental_date) FROM rental;
+SELECT * , MONTHNAME(rental_date) AS month_rental,  DAYNAME(rental_date) AS weekday FROM rental LIMIT 20;
+SELECT * ,  IF( WEEKDAY( rental_date ) <5, 'weekday', 'weekend' ) AS DAY_TYPE FROM rental; 
+SELECT title, rental_duration, IFNULL(NULL, 'Not Available') AS availability FROM film ORDER BY title ASC;
+SELECT CONCAT(first_name,last_name,LEFT(email,3)) AS personalized_name FROM customer ORDER BY last_name ASC;
+SELECT COUNT(DISTINCT film_id) AS total_films FROM film;
+SELECT COUNT(DISTINCT film_id) AS total_by_rating, rating FROM film GROUP BY rating;
+SELECT COUNT(DISTINCT film_id) AS total_by_rating, rating FROM film GROUP BY rating ORDER BY total_by_rating DESC;
+SELECT ROUND(AVG(length)) AS avg_duration_byR, rating FROM film GROUP BY rating ORDER BY avg_duraction_byR DESC;
+SELECT IF(AVG(length)>='120','long movie','short movie') AS length_type FROM film ORDER BY title DESC;
+SELECT DISTINCT last_name FROM actor ORDER BY last_name ASC;
